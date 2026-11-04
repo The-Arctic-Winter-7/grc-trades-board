@@ -4,6 +4,8 @@ const app = new express();
 
 const PORT = 3050;
 
+const jobs = [];
+
 app.use(express.static('public'));
 
 app.use(express.urlencoded({ extended: true }));

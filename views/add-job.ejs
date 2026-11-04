@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Job</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <h1>Add a Job Posting</h1>
+
+  <form action="/submit-job" method="POST" class="job-form">
+    <label for="jobTitle">Job Title</label>
+    <input type="text" id="jobTitle" name="jobTitle" required>
+
+    <label for="companyName">Company Name</label>
+    <input type="text" id="companyName" name="companyName" required>
+
+    <label for="tradeArea">Trade Area</label>
+    <select id="tradeArea" name="tradeArea" required>
+      <option value="">Choose one</option>
+      <option value="Welding">Welding</option>
+      <option value="Automotive">Automotive</option>
+      <option value="Manufacturing">Manufacturing</option>
+      <option value="Carpentry">Carpentry</option>
+      <option value="Mechatronics">Mechatronics</option>
+    </select>
+
+    <label for="location">Location</label>
+    <input type="text" id="location" name="location" required>
+
+    <label for="jobType">Part or Full Time</label>
+    <select id="jobType" name="jobType" required>
+      <option value="">Choose one</option>
+      <option value="Part Time">Part Time</option>
+      <option value="Full Time">Full Time</option>
+    </select>
+
+    <label for="postDate">Post Date</label>
+    <input type="date" id="postDate" name="postDate" required>
+
+    <label for="expirationDate">Expiration Date</label>
+    <input type="date" id="expirationDate" name="expirationDate" required>
+
+    <label for="applicationUrl">Application URL</label>
+    <input type="url" id="applicationUrl" name="applicationUrl" required>
+
+    <button type="submit">Submit Job</button>
+  </form>
+</body>
+</html>

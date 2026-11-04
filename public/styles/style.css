@@ -19,3 +19,14 @@
     color: red;
     font-size: 0.9rem;
 }
+
+.jobs-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.jobs-table th, .jobs-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}

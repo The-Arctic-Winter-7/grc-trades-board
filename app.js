@@ -41,6 +41,10 @@ app.get('/confirm', (req, res) => {
     res.render('confirm');
 });
 
+app.get('/jobs', (req, res) => {
+    res.render('jobs', { jobs });
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 });

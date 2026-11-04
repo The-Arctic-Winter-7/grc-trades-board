@@ -14,6 +14,31 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+app.get('/add-job', (req, res) => {
+    res.render('add-job');
+});
+
+app.post('/submit-job', (req, res) => {
+    const job = {
+        jobTitle: req.body.jobTitle,
+        companyName: req.body.companyName,
+        tradeArea: req.body.tradeArea,
+        location: req.body.location,
+        jobType: req.body.jobType,
+        postDate: req.body.postDate,
+        expirationDate: req.body.expirationDate,
+        applicationUrl: req.body.applicationUrl,
+        submittedAt: new Date()
+    };
+
+    jobs.push(job);
+    res.redirect('/confirm');
+});
+
+app.get('/confirm', (req, res) => {
+    res.render('confirm');
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 });

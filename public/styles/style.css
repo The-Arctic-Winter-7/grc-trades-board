@@ -42,6 +42,20 @@ p {
     box-shadow: var(--shadow);
     border-radius: .5rem;
     background: var(--secondary-color);
+    overflow: hidden;
+}
+
+/*Allows table wrap to be constrained to parent container*/
+#main .dataTables_wrapper {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+/*Allows table itself to be constrained to parent container*/
+#main table.jobs-table {
+    width: 100% !important; /*Ensures priority over other potential overrides to table width*/
+    max-width: 100%;
 }
 
 #main-button-container {

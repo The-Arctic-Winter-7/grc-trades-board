@@ -11,10 +11,10 @@
     --error-color: #d9534f;
     --background-color: #f9f9f9;
     --border-color: #ddd;
-    --shadow: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-body{
+body {
     font-family: Arial, sans-serif;
     line-height: 1.5;
     color: #333;
@@ -23,23 +23,31 @@ body{
     padding: 0 20px;
     background-color: var(--background-color);
 }
-h1{
+
+#job-table {
+
+    /*--Navigation / Links --*/
+    job-table>a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+
+    job-table>a:hover {
+        text-decoration: underline;
+    }
+}
+
+h1 {
     color: var(--primary-color);
     margin-bottom: 10px;
 }
-p{
+
+p {
     margin-bottom: 20px;
 }
-/*--Navigation / Links --*/
-a{
-    color: #0066cc;
-    text-decoration: none;
-}
-a:hover{
-    text-decoration: underline;
-}
+
 /*Simple button style for anchor links*/
-body > a{
+.main-button {
     display: inline-block;
     background-color: var(--primary-color);
     color: var(--secondary-color);
@@ -47,11 +55,15 @@ body > a{
     border-radius: 4px;
     margin-right: 10px;
     margin-bottom: 20px;
+    text-decoration: none;
 }
-body > a:hover{
+
+.main-button:hover {
     background-color: var(--primary-color-hover);
     text-decoration: none;
 }
+
+
 /*--Job Form--*/
 .job-form {
     display: grid;
@@ -63,20 +75,24 @@ body > a:hover{
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow);
 }
-.job-form label{
+
+.job-form label {
     font-weight: bold;
     font-size: 0.95rem;
     margin-top: 5px;
 }
 
-.job-form input, .job-form select, .job-form button {
+.job-form input,
+.job-form select,
+.job-form button {
     padding: 10px;
     font-size: 1rem;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     width: 100%;
 }
-.job-form button{
+
+.job-form button {
     background-color: var(--primary-color);
     color: var(--secondary-color);
     border: none;
@@ -84,7 +100,8 @@ body > a:hover{
     cursor: pointer;
     margin-top: 15px;
 }
-.job-form button:hover{
+
+.job-form button:hover {
     background-color: var(--primary-color-hover);
 }
 
@@ -93,6 +110,7 @@ body > a:hover{
     font-size: 0.85rem;
     margin-bottom: 5px;
 }
+
 /*--Jobs Table--*/
 .jobs-table {
     width: 100%;
@@ -102,19 +120,22 @@ body > a:hover{
     box-shadow: var(--shadow);
 }
 
-.jobs-table th, .jobs-table td {
+.jobs-table th,
+.jobs-table td {
     border: 1px solid var(--border-color);
     padding: 10px 12px;
     text-align: left;
 }
 
-.jobs-table th{
+.jobs-table th {
     background-color: var(--primary-color);
     color: var(--secondary-color);
 }
-.jobs-table tr:nth-child(even){
+
+.jobs-table tr:nth-child(even) {
     background-color: var(--tertiary-color);
 }
-.jobs-table tr:hover{
+
+.jobs-table tr:hover {
     background-color: var(--tertiary-color-hover);
 }

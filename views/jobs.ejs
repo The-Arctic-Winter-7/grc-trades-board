@@ -9,68 +9,70 @@
 </head>
 
 <body>
-  <h1>Browse Available Jobs</h1>
-  <p><a href="/">Back home</a> | <a href="/add-job">Add a Job </a></p>
+  <div id="job-table">
+    <h1>Browse Available Jobs</h1>
+    <p><a href="/">Back home</a> | <a href="/add-job">Add a Job </a></p>
 
-  <% if (jobs.length===0) { %>
-    <p> No jobs are currently available. Check back later or add a new job posting!</p>
-    <% } else { %>
-      <table class="jobs-table">
-        <thead>
-          <tr>
-            <th>Job Title</th>
-            <th>Company</th>
-            <th>Trade Area</th>
-            <th>Location</th>
-            <th>Type</th>
-            <th>Post Date</th>
-            <th>Apply</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% jobs.forEach(job=> { %>
+    <% if (jobs.length===0) { %>
+      <p> No jobs are currently available. Check back later or add a new job posting!</p>
+      <% } else { %>
+        <table class="jobs-table">
+          <thead>
             <tr>
-              <td>
-                <%= job.jobTitle %>
-              </td>
-              <td>
-                <%= job.companyName %>
-              </td>
-              <td>
-                <%= job.tradeArea %>
-              </td>
-              <td>
-                <%= job.location %>
-              </td>
-              <td>
-                <%= job.jobType %>
-              </td>
-              <td>
-                <%= job.postDate %>
-              </td>
-              <td>
-                <a href="<%= job.applicationUrl %>" target="_blank" rel="noopener noreferrer">Apply Now</a>
-              </td>
+              <th>Job Title</th>
+              <th>Company</th>
+              <th>Trade Area</th>
+              <th>Location</th>
+              <th>Type</th>
+              <th>Post Date</th>
+              <th>Apply</th>
             </tr>
-            <% }) %>
-        </tbody>
-      </table>
-      <% } %>
+          </thead>
+          <tbody>
+            <% jobs.forEach(job=> { %>
+              <tr>
+                <td>
+                  <%= job.jobTitle %>
+                </td>
+                <td>
+                  <%= job.companyName %>
+                </td>
+                <td>
+                  <%= job.tradeArea %>
+                </td>
+                <td>
+                  <%= job.location %>
+                </td>
+                <td>
+                  <%= job.jobType %>
+                </td>
+                <td>
+                  <%= job.postDate %>
+                </td>
+                <td>
+                  <a href="<%= job.applicationUrl %>" target="_blank" rel="noopener noreferrer">Apply Now</a>
+                </td>
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
+        <% } %>
+  </div>
 
-        <!-- JQuery CDN-->
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <!-- DataTables JS CDN -->
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+  <!-- JQuery CDN-->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- DataTables JS CDN -->
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 
-        <!-- Initialize DataTables -->
-        <script>
-          $(document).ready(function () {
-            $('#jobsTable').DataTable({
-              responsive: true
-            });
-          });
-        </script>
+  <!-- Initialize DataTables -->
+  <script>
+    $(document).ready(function () {
+      $('#jobsTable').DataTable({
+        responsive: true
+      });
+    });
+  </script>
 </body>
 
 </html>

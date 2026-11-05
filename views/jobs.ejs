@@ -71,7 +71,12 @@
   <script>
     $(document).ready(function () {
       $('.jobs-table').DataTable({
-        responsive: true,
+        responsive: {
+          details: {
+            type: 'inline',
+            display: $.fn.DataTable.Responsive.display.childRowImmediate
+          }
+        },
         columnDefs: [{ orderable: false, targets: 6 }]
       });
     });

@@ -6,6 +6,7 @@
     <!-- DataTables CSS CDN -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
 </head>
 
 <body>
@@ -50,7 +51,8 @@
                   <%= job.postDate %>
                 </td>
                 <td>
-                  <a href="<%= job.applicationUrl %>" target="_blank" rel="noopener noreferrer" class="main-button">Apply Now</a>
+                  <a href="<%= job.applicationUrl %>" target="_blank" rel="noopener noreferrer"
+                    class="main-button">Apply Now</a>
                 </td>
               </tr>
               <% }) %>
@@ -68,8 +70,9 @@
   <!-- Initialize DataTables -->
   <script>
     $(document).ready(function () {
-      $('#jobsTable').DataTable({
-        responsive: true
+      $('.jobs-table').DataTable({
+        responsive: true,
+        columnDefs: [{ orderable: false, targets: 6 }]
       });
     });
   </script>

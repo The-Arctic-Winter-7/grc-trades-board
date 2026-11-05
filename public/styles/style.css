@@ -35,19 +35,6 @@ p {
     text-align: center;
 }
 
-#job-table {
-
-    /*--Navigation / Links --*/
-    job-table>a {
-        color: #0066cc;
-        text-decoration: none;
-    }
-
-    job-table>a:hover {
-        text-decoration: underline;
-    }
-}
-
 #main {
     max-width: 800px;
     margin: 2rem auto;
@@ -71,6 +58,7 @@ p {
     border-radius: 4px;
     margin-right: 10px;
     margin-bottom: 20px;
+    text-align: center;
     text-decoration: none;
 }
 
@@ -78,6 +66,17 @@ p {
     background-color: var(--primary-color-hover);
     text-decoration: none;
 }
+
+/*--Navigation / Links --*/
+.nav a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
 
 
 /*--Job Form--*/

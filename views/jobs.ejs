@@ -9,9 +9,9 @@
 </head>
 
 <body>
-  <div id="job-table">
+  <div id="main">
     <h1>Browse Available Jobs</h1>
-    <p><a href="/">Back home</a> | <a href="/add-job">Add a Job </a></p>
+    <p class="nav"><a href="/">Back home</a> | <a href="/add-job">Add a Job </a></p>
 
     <% if (jobs.length===0) { %>
       <p> No jobs are currently available. Check back later or add a new job posting!</p>
@@ -50,7 +50,7 @@
                   <%= job.postDate %>
                 </td>
                 <td>
-                  <a href="<%= job.applicationUrl %>" target="_blank" rel="noopener noreferrer">Apply Now</a>
+                  <a href="<%= job.applicationUrl %>" target="_blank" rel="noopener noreferrer" class="main-button">Apply Now</a>
                 </td>
               </tr>
               <% }) %>

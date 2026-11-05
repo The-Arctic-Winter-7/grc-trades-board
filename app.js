@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', {title: 'HOME' });
 });
 
 app.get('/add-job', (req, res) => {
@@ -27,7 +27,7 @@ app.post('/submit-job', (req, res) => {
         tradeArea: req.body.tradeArea,
         location: req.body.location,
         jobType: req.body.jobType,
-        postDate: req.body.postDate,
+        postDate: new Date().toLocaleDateString(),
         expirationDate: req.body.expirationDate,
         applicationUrl: req.body.applicationUrl,
         submittedAt: new Date()
@@ -42,7 +42,7 @@ app.get('/confirm', (req, res) => {
 });
 
 app.get('/jobs', (req, res) => {
-    res.render('jobs', { jobs });
+    res.render('jobs', { jobs: jobs });
 });
 
 app.listen(PORT, () => {

@@ -1,10 +1,22 @@
 import express from 'express';
+import mysql2 from 'mysql2';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = new express();
 
 const PORT = 3050;
 
 const jobs = [];
+
+const pool = mysql2.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
+}).promise();
 
 app.use(express.static('public'));
 
@@ -20,8 +32,8 @@ app.get('/add-job', (req, res) => {
     res.render('add-job');
 });
 
-app.post('/submit-job', (req, res) => {
-    const job = {
+app.post('/submit-job', async (req, res) => {
+    /*const job = {
         jobTitle: req.body.jobTitle,
         companyName: req.body.companyName,
         tradeArea: req.body.tradeArea,
@@ -30,19 +42,47 @@ app.post('/submit-job', (req, res) => {
         postDate: new Date().toLocaleDateString(),
         expirationDate: req.body.expirationDate,
         applicationUrl: req.body.applicationUrl,
-        submittedAt: new Date()
-    };
+        timestamp: new Date()
+    };*/
+    try {
+        const job = req.body;
+        console.log(job);
 
-    jobs.push(job);
-    res.redirect('/confirm');
+        const sql = 'INSERT INTO jobs (jobTitle, companyName, tradeArea, location, jobType, postDate, expirationDate, applicationURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+
+        const params = [
+            job.jobTitle,
+            job.companyName,
+            job.tradeArea,
+            job.location,
+            job.jobType,
+            job.postDate,
+            job.expirationDate,
+            job.applicationUrl
+        ];
+
+        const [result] = await pool.execute(sql, params);
+
+        res.render('confirm', { job });
+    } catch (err) {
+        console.error('Error inserting job: ', err);
+        res.status(500).send('Sorry, there was an error processing this job. Please try again.');
+    }
 });
 
 app.get('/confirm', (req, res) => {
     res.render('confirm');
 });
 
-app.get('/jobs', (req, res) => {
-    res.render('jobs', { jobs: jobs });
+app.get('/jobs', async (req, res) => {
+    try {
+        const jobs = await pool.query('SELECT * FROM jobs');
+        console.log(jobs[0]);
+        res.render('jobs', { jobs: jobs[0] });
+    } catch (err) {
+        console.error('Database error: ', err);
+        res.status(500).send('Database error ocurred.');
+    }
 });
 
 app.listen(PORT, () => {

@@ -25,7 +25,7 @@
               <th>Trade Area</th>
               <th>Location</th>
               <th>Type</th>
-              <th>Post Date</th>
+              <th>Expiration Date</th>
               <th>Apply</th>
             </tr>
           </thead>
@@ -48,7 +48,7 @@
                   <%= job.jobType %>
                 </td>
                 <td>
-                  <%= job.postDate %>
+                  <%= job.expirationDate %>
                 </td>
                 <td>
                   <a href="<%= job.applicationUrl %>" target="_blank" rel="noopener noreferrer"
@@ -73,7 +73,6 @@
       $('.jobs-table').DataTable({
         responsive: {
           details: {
-            type: 'inline',
             display: $.fn.DataTable.Responsive.display.childRowImmediate
           }
         },

@@ -3,62 +3,64 @@
 
 <head>
   <%- include('partials/head',{title: 'Browse Jobs' })%>
-    <!-- DataTables CSS CDN -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+  <!-- DataTables CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 
 </head>
 
 <body>
   <div id="main">
     <h1>Browse Available Jobs</h1>
-    <p class="nav"><a href="/">Back home</a> | <a href="/add-job">Add a Job </a></p>
+    <div id="main-button-container" .=>
+      <a href="/" class="main-button">Back home</a>
+      <a href="/add-job" class="main-button">Add a Job </a>
+    </div>
 
     <% if (jobs.length===0) { %>
-      <p> No jobs are currently available. Check back later or add a new job posting!</p>
-      <% } else { %>
-        <table class="jobs-table">
-          <thead>
-            <tr>
-              <th>Job Title</th>
-              <th>Company</th>
-              <th>Trade Area</th>
-              <th>Location</th>
-              <th>Type</th>
-              <th>Expiration Date</th>
-              <th>Apply</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% jobs.forEach(job=> { %>
-              <tr>
-                <td>
-                  <%= job.jobTitle %>
-                </td>
-                <td>
-                  <%= job.companyName %>
-                </td>
-                <td>
-                  <%= job.tradeArea %>
-                </td>
-                <td>
-                  <%= job.location %>
-                </td>
-                <td>
-                  <%= job.jobType %>
-                </td>
-                <td>
-                  <%= job.expirationDate %>
-                </td>
-                <td>
-                  <a href="<%= job.applicationUrl %>" target="_blank" rel="noopener noreferrer"
-                    class="main-button">Apply Now</a>
-                </td>
-              </tr>
-              <% }) %>
-          </tbody>
-        </table>
-        <% } %>
+    <p> No jobs are currently available. Check back later or add a new job posting!</p>
+    <% } else { %>
+    <table class="jobs-table">
+      <thead>
+        <tr>
+          <th>Job Title</th>
+          <th>Company</th>
+          <th>Trade Area</th>
+          <th>Location</th>
+          <th>Type</th>
+          <th>Post Date</th>
+          <th>Apply</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% jobs.forEach(job=> { %>
+        <tr>
+          <td>
+            <%= job.jobTitle %>
+          </td>
+          <td>
+            <%= job.companyName %>
+          </td>
+          <td>
+            <%= job.tradeArea %>
+          </td>
+          <td>
+            <%= job.location %>
+          </td>
+          <td>
+            <%= job.jobType %>
+          </td>
+          <td>
+            <%= job.postDate %>
+          </td>
+          <td>
+            <a href="<%= job.applicationUrl %>" target="_blank" rel="noopener noreferrer" class="main-button">Apply Now</a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <% } %>
   </div>
 
   <!-- JQuery CDN-->
@@ -69,14 +71,17 @@
 
   <!-- Initialize DataTables -->
   <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('.jobs-table').DataTable({
         responsive: {
           details: {
             display: $.fn.DataTable.Responsive.display.childRowImmediate
           }
         },
-        columnDefs: [{ orderable: false, targets: 6 }]
+        columnDefs: [{
+          orderable: false,
+          targets: 6
+        }]
       });
     });
   </script>

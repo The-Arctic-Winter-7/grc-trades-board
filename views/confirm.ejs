@@ -6,15 +6,27 @@
 </head>
 
 <body>
-  <div id="main">
-    <h1>Job Posted!</h1>
-    <p>Your job posting was saved.</p>
-    <div id="main-button-container">
-      <a href="/add-job" class="main-button">Add another job</a>
-      <a href="/jobs" class="main-button">Browse jobs</a>
-      <a href="/" class="main-button">Back home</a>
+  <%- include('partials/nav', { heading: 'Job Summary' })%>
+    <div id="main">
+      <h1>Job Posted!</h1>
+      <p>Your job posting was saved successfully</p>
+      <h2>Job Summary:</h2>
+      <p><strong>Job Title</strong>: <%= job.jobTitle %></p>
+      <p><strong>Company</strong>: <%= job.companyName %></p>
+      <p><strong>Trades Area</strong>: <%= job.tradesArea %></p>
+      <p><strong>Job Location</strong>: <%= job.location %></p>
+      <p><strong>Listing Type</strong>: <%= job.listingType %></p>
+      <p><strong>Hours</strong>: <%= job.jobType %></p>
+      <!-- JavaScript parses date strings as UTC midnight, so we have to append a time to force Javascript to parse to the local time zone rather than UTC -->
+      <p><strong>Post Date</strong>: <%= new Date(job.postDate + 'T00:00:00').toLocaleDateString('en-US') %></p>
+      <p><strong>Expiration Date</strong>: <%= new Date(job.expirationDate + 'T00:00:00').toLocaleDateString('en-US') %></p>
+      <p><strong>Application URL</strong>: <%= job.applicationUrl %></p>
+      <div id="main-button-container">
+        <a href="/add-job" class="main-button">Add another job</a>
+        <a href="/jobs" class="main-button">Browse jobs</a>
+        <a href="/" class="main-button">Back home</a>
+      </div>
     </div>
-  </div>
 </body>
 
 </html>

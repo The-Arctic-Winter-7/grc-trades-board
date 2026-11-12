@@ -55,7 +55,7 @@
           <td>
             <%= job.jobType %>
           </td>
-          <td>
+          <td data-order = "<%= job.expirationDate.toISOString() %>">
             <%= job.expirationDate.toLocaleDateString('en-US') %>
           </td>
           <td>
@@ -83,10 +83,10 @@
             display: $.fn.DataTable.Responsive.display.childRowImmediate
           }
         },
-        "order":[],//in the order of newest first
+        "order":[[6, 'asc']], // Sorts by expiration date by default; first to expire is first
         columnDefs: [{
           orderable: false,
-          targets: 7
+          targets: 7          // Refers to 'Apply' column of the table; apply column cannot be sorted
         }]
       });
     });

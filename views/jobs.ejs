@@ -38,28 +38,28 @@
         <% jobs.forEach(job=> { %>
         <tr>
           <td>
-            <%= job.jobTitle %>
+            <%= job.job_title %>
           </td>
           <td>
-            <%= job.companyName %>
+            <%= job.company_name %>
           </td>
           <td>
-            <%= job.tradeArea %>
+            <%= job.trade_area %>
           </td>
           <td>
             <%= job.location %>
           </td>
           <td>
-            <%= job.listingType %>
+            <%= job.listing_type %>
           </td>
           <td>
-            <%= job.jobType %>
+            <%= job.job_type %>
           </td>
-          <td data-order = "<%= job.expirationDate.toISOString() %>">
-            <%= job.expirationDate.toLocaleDateString('en-US') %>
+          <td data-order = "<%= job.expiration_date.toISOString() %>">
+            <%= job.expiration_date.toLocaleDateString('en-US') %>
           </td>
           <td>
-            <a href="<%= job.applicationUrl %>" target="_blank" rel="noopener noreferrer" class="main-button">Apply Now</a>
+            <a href="<%= job.application_url %>" target="_blank" rel="noopener noreferrer" class="main-button">Apply Now</a>
           </td>
         </tr>
         <% }) %>

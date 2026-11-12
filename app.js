@@ -77,10 +77,10 @@ app.get('/confirm', (req, res) => {
 
 app.get('/jobs', async (req, res) => {
     try {
-        const sql = 'SELECT * FROM jobs WHERE expirations >= CURDATE() ORDER BY postDate DESC';
+        //selects only active jobs and orders them by newest first
+        const sql = 'SELECT * FROM jobs WHERE expirationDATE >= CURDATE() ORDER BY postDate DESC';
         const [jobs] = await pool.query(sql);
 
-        console.log(jobs);
         res.render('jobs', { jobs: jobs });
     } catch (err) {
         console.error('Database error: ', err);

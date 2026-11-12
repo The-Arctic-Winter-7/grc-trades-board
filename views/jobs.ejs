@@ -27,7 +27,8 @@
           <th>Company</th>
           <th>Trade Area</th>
           <th>Location</th>
-          <th>Type</th>
+          <th>Job or Internship</th>
+          <th>Full-Time or Part-Time</th>
           <th>Expiration Date</th>
           <th>Apply</th>
         </tr>
@@ -46,6 +47,9 @@
           </td>
           <td>
             <%= job.location %>
+          </td>
+          <td>
+            <%= job.listingType %>
           </td>
           <td>
             <%= job.jobType %>
@@ -80,7 +84,7 @@
         },
         columnDefs: [{
           orderable: false,
-          targets: 6
+          targets: 7
         }]
       });
     });

@@ -48,13 +48,14 @@ app.post('/submit-job', async (req, res) => {
         const job = req.body;
         console.log(job);
 
-        const sql = 'INSERT INTO jobs (jobTitle, companyName, tradeArea, location, jobType, postDate, expirationDate, applicationURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+        const sql = 'INSERT INTO jobs (jobTitle, companyName, tradeArea, location, listingType, jobType, postDate, expirationDate, applicationURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
         const params = [
             job.jobTitle,
             job.companyName,
             job.tradeArea,
             job.location,
+            job.listingType,
             job.jobType,
             job.postDate,
             job.expirationDate,
@@ -76,9 +77,12 @@ app.get('/confirm', (req, res) => {
 
 app.get('/jobs', async (req, res) => {
     try {
-        const jobs = await pool.query('SELECT * FROM jobs');
-        console.log(jobs[0]);
-        res.render('jobs', { jobs: jobs[0] });
+        //selects only active jobs and orders them by newest first
+        const sql = 'SELECT * FROM jobs WHERE expirationDATE >= CURDATE() ORDER BY postDate DESC';
+
+        const [jobs] = await pool.query(sql);
+
+        res.render('jobs', { jobs: jobs });
     } catch (err) {
         console.error('Database error: ', err);
         res.status(500).send('Database error ocurred.');

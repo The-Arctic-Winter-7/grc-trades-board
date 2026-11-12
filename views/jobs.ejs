@@ -15,6 +15,7 @@
     <div id="main-button-container" .=>
       <a href="/" class="main-button">Back home</a>
       <a href="/add-job" class="main-button">Add a Job </a>
+      <a href="https://www.greenriver.edu/students/academics/areas-of-interest/program-maps/trades-industrial-tech-aviation-natural-resources/index.html" target="_blank" rel="noopener noreferrer" class="main-button">Explore GRC Trades Programs</a>
     </div>
 
     <% if (jobs.length===0) { %>
@@ -27,7 +28,8 @@
           <th>Company</th>
           <th>Trade Area</th>
           <th>Location</th>
-          <th>Type</th>
+          <th>Job or Internship</th>
+          <th>Full-Time or Part-Time</th>
           <th>Expiration Date</th>
           <th>Apply</th>
         </tr>
@@ -46,6 +48,9 @@
           </td>
           <td>
             <%= job.location %>
+          </td>
+          <td>
+            <%= job.listingType %>
           </td>
           <td>
             <%= job.jobType %>
@@ -79,9 +84,10 @@
             display: $.fn.DataTable.Responsive.display.childRowImmediate
           }
         },
+        "order":[],//in the order of newest first
         columnDefs: [{
           orderable: false,
-          targets: 6
+          targets: 7
         }]
       });
     });

@@ -37,13 +37,20 @@
       <input type="text" id="location" name="location">
       <span class="error" id="locationError"></span>
 
-      <label for="jobType">Part or Full Time</label>
+
+      <label for="listingType">Job or Internship</label>
+      <select id="listingType" name="listingType">
+        <option value="">Choose one</option>
+        <option value="Job">Job</option>
+        <option value="Internship">Internship</option>
+      </select>
+      <span class="error" id="listingTypeError"></span>
+
+      <label for="jobType">Full-Time or Part-Time</label>
       <select id="jobType" name="jobType">
         <option value="">Choose one</option>
         <option value="Part Time">Part Time</option>
         <option value="Full Time">Full Time</option>
-        <option value="Internship">Internship</option>
-
       </select>
       <span class="error" id="jobTypeError"></span>
 

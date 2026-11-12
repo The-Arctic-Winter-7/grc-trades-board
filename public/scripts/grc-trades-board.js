@@ -3,7 +3,8 @@ const fields = [
     { id: 'companyName', message: 'Please enter a company name.' },
     { id: 'tradeArea', message: 'Please choose a trade area.' },
     { id: 'location', message: 'Please enter a location.' },
-    { id: 'jobType', message: 'Please choose part time or full time.' },
+    { id: 'listingType', message: 'Please choose job or internship.' },
+    { id: 'jobType', message: 'Please choose full time or part time.' },
     { id: 'postDate', message: 'Please choose a post date.' },
     { id: 'expirationDate', message: 'Please choose an expiration date.' },
     { id: 'applicationUrl', message: 'Please enter an application URL.' }

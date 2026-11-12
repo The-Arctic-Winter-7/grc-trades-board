@@ -79,6 +79,7 @@ app.get('/jobs', async (req, res) => {
     try {
         //selects only active jobs and orders them by newest first
         const sql = 'SELECT * FROM jobs WHERE expirationDATE >= CURDATE() ORDER BY postDate DESC';
+
         const [jobs] = await pool.query(sql);
 
         res.render('jobs', { jobs: jobs });

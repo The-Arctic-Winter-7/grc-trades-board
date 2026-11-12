@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
 * {
     box-sizing: border-box;
 }
@@ -9,7 +11,7 @@
     --tertiary-color: #f8f9fa;
     --tertiary-color-hover: #f1f1f1;
     --error-color: #d9534f;
-    --background-color: #f9f9f9;
+    --background-color: #ededed;
     --border-color: #ddd;
     --shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
@@ -101,10 +103,13 @@ p {
 
 .nav-bar-title-heading {
     text-transform: uppercase;
-    margin: -1.5rem;
+    font-family:'Rubik', sans-serif;
+    font-weight: 700;
+    margin: -1.56rem;
+    margin-left: -1.2rem;
     height: 100%;
     color: var(--primary-color);
-    font-size: 11.1rem;
+    font-size: 11.25rem;
     line-height: 1;
     white-space: nowrap;
 }

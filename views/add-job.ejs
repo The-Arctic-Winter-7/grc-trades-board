@@ -6,70 +6,72 @@
 </head>
 
 <body>
-  <div id="main">
-    <h1>Add a Job Posting</h1>
-    <div id="main-button-container" .=>
-      <a href="/" class="main-button">Back home</a>
-      <a href="/jobs" class="main-button">Browse Jobs </a>
-    </div>
+  <%- include('partials/nav', { heading: 'Job Posting' })%>
+    <div id="main">
+      <h1>Add a Job Posting</h1>
+      <div id="main-button-container" .=>
+        <a href="/" class="main-button">Back home</a>
+        <a href="/jobs" class="main-button">Browse Jobs </a>
+      </div>
 
-    <form id="jobForm" action="/submit-job" method="POST" class="job-form" novalidate onsubmit="return validateForm()">
-      <label for="jobTitle">Job Title</label>
-      <input type="text" id="jobTitle" name="jobTitle">
-      <span class="error" id="jobTitleError"></span>
+      <form id="jobForm" action="/submit-job" method="POST" class="job-form" novalidate
+        onsubmit="return validateForm()">
+        <label for="jobTitle">Job Title</label>
+        <input type="text" id="jobTitle" name="jobTitle">
+        <span class="error" id="jobTitleError"></span>
 
-      <label for="companyName">Company Name</label>
-      <input type="text" id="companyName" name="companyName">
-      <span class="error" id="companyNameError"></span>
+        <label for="companyName">Company Name</label>
+        <input type="text" id="companyName" name="companyName">
+        <span class="error" id="companyNameError"></span>
 
-      <label for="tradeArea">Trade Area</label>
-      <select id="tradeArea" name="tradeArea">
-        <option value="">Choose one</option>
-        <option value="Welding">Welding</option>
-        <option value="Automotive">Automotive</option>
-        <option value="Manufacturing">Manufacturing</option>
-        <option value="Carpentry">Carpentry</option>
-        <option value="Mechatronics">Mechatronics</option>
-      </select>
-      <span class="error" id="tradeAreaError"></span>
+        <label for="tradeArea">Trade Area</label>
+        <select id="tradeArea" name="tradeArea">
+          <option value="">Choose one</option>
+          <option value="Welding">Welding</option>
+          <option value="Automotive">Automotive</option>
+          <option value="Manufacturing">Manufacturing</option>
+          <option value="Carpentry">Carpentry</option>
+          <option value="Mechatronics">Mechatronics</option>
+        </select>
+        <span class="error" id="tradeAreaError"></span>
 
-      <label for="location">Location</label>
-      <input type="text" id="location" name="location">
-      <span class="error" id="locationError"></span>
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location">
+        <span class="error" id="locationError"></span>
 
 
-      <label for="listingType">Job or Internship</label>
-      <select id="listingType" name="listingType">
-        <option value="">Choose one</option>
-        <option value="Job">Job</option>
-        <option value="Internship">Internship</option>
-      </select>
-      <span class="error" id="listingTypeError"></span>
+        <label for="listingType">Job or Internship</label>
+        <select id="listingType" name="listingType">
+          <option value="">Choose one</option>
+          <option value="Job">Job</option>
+          <option value="Internship">Internship</option>
+        </select>
+        <span class="error" id="listingTypeError"></span>
 
-      <label for="jobType">Full-Time or Part-Time</label>
-      <select id="jobType" name="jobType">
-        <option value="">Choose one</option>
-        <option value="Part Time">Part Time</option>
-        <option value="Full Time">Full Time</option>
-      </select>
-      <span class="error" id="jobTypeError"></span>
+        <label for="jobType">Full-Time or Part-Time</label>
+        <select id="jobType" name="jobType">
+          <option value="">Choose one</option>
+          <option value="Part Time">Part Time</option>
+          <option value="Full Time">Full Time</option>
+        </select>
+        <span class="error" id="jobTypeError"></span>
 
-      <label for="postDate">Post Date</label>
-      <input type="date" id="postDate" name="postDate">
-      <span class="error" id="postDateError"></span>
+        <label for="postDate">Post Date</label>
+        <input type="date" id="postDate" name="postDate">
+        <span class="error" id="postDateError"></span>
 
-      <label for="expirationDate">Expiration Date</label>
-      <input type="date" id="expirationDate" name="expirationDate">
-      <span class="error" id="expirationDateError"></span>
+        <label for="expirationDate">Expiration Date</label>
+        <input type="date" id="expirationDate" name="expirationDate">
+        <span class="error" id="expirationDateError"></span>
 
-      <label for="applicationUrl">Application URL</label>
-      <input type="text" id="applicationUrl" name="applicationUrl">
-      <span class="error" id="applicationUrlError"></span>
+        <label for="applicationUrl">Application URL</label>
+        <input type="text" id="applicationUrl" name="applicationUrl">
+        <span class="error" id="applicationUrlError"></span>
 
-      <button type="submit">Submit Job</button>
-    </form>
+        <button type="submit">Submit Job</button>
+      </form>
 
-    <script src="/scripts/grc-trades-board.js"></script>
+      <script src="/scripts/grc-trades-board.js"></script>
 </body>
 
 </html>

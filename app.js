@@ -77,7 +77,7 @@ app.get('/confirm', (req, res) => {
 
 app.get('/jobs', async (req, res) => {
     try {
-        const sql = 'SELECT * FROM jobs WHERE expirations >= CURDATE() ORDER BY postDate DESC';
+        const sql = 'SELECT * FROM jobs WHERE expirationDate >= CURDATE() ORDER BY postDate DESC';
         const [jobs] = await pool.query(sql);
 
         console.log(jobs);

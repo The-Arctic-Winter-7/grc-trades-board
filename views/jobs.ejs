@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <%- include('partials/nav', { heading: 'Dashboard' })%>
   <div id="main">
     <h1>Browse Available Jobs</h1>
     <div id="main-button-container" .=>
@@ -56,8 +57,7 @@
             <%= job.jobType %>
           </td>
           <td>
-            <%= job.expirationDate.toLocaleDateString('
-            en-US') %>
+            <%= job.expirationDate.toLocaleDateString('en-US') %>
           </td>
           <td>
             <a href="<%= job.applicationUrl %>" target="_blank" rel="noopener noreferrer" class="main-button">Apply Now</a>

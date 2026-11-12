@@ -3,8 +3,8 @@
 }
 
 :root {
-    --primary-color: #08923d;
-    --primary-color-hover: #078136;
+    --primary-color: #2c882b;
+    --primary-color-hover: #d14900;
     --secondary-color: white;
     --tertiary-color: #f8f9fa;
     --tertiary-color-hover: #f1f1f1;
@@ -17,10 +17,8 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.5;
+    margin: 0;
     color: #333;
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 20px;
     background-color: var(--background-color);
 }
 
@@ -36,7 +34,7 @@ p {
 }
 
 #main {
-    max-width: 800px;
+    max-width: 70%;
     margin: 2rem auto;
     padding: 1rem;
     box-shadow: var(--shadow);
@@ -54,7 +52,8 @@ p {
 
 /*Allows table itself to be constrained to parent container*/
 #main table.jobs-table {
-    width: 100% !important; /*Ensures priority over other potential overrides to table width*/
+    width: 100% !important;
+    /*Ensures priority over other potential overrides to table width*/
     max-width: 100%;
 }
 
@@ -67,6 +66,7 @@ p {
 .main-button {
     display: inline-block;
     background-color: var(--primary-color);
+    transition: background-color 0.2s ease;
     color: var(--secondary-color);
     padding: 8px 14px;
     border-radius: 4px;
@@ -81,17 +81,33 @@ p {
     text-decoration: none;
 }
 
-/*--Navigation / Links --*/
-.nav a {
-    color: #0066cc;
-    text-decoration: none;
+/*--Navigation Bar--*/
+.nav-bar {
+    display: flex;
+    gap: 0;
+    height: 125px;
 }
 
-.nav a:hover {
-    text-decoration: underline;
+.nav-bar-logo img {
+    width: 13em;
+    padding: 1.35em;
+    background-color: var(--primary-color);
+    transition: background-color 0.2s ease;
 }
 
+.nav-bar-logo img:hover {
+    background-color: var(--primary-color-hover);
+}
 
+.nav-bar-title-heading {
+    text-transform: uppercase;
+    margin: -1.5rem;
+    height: 100%;
+    color: var(--primary-color);
+    font-size: 11.1rem;
+    line-height: 1;
+    white-space: nowrap;
+}
 
 /*--Job Form--*/
 .job-form {

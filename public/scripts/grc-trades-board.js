@@ -1,3 +1,4 @@
+// An array of fields for the error messages
 const fields = [
     { id: 'jobTitle', message: 'Please enter a job title.' },
     { id: 'companyName', message: 'Please enter a company name.' },
@@ -10,6 +11,7 @@ const fields = [
     { id: 'applicationUrl', message: 'Please enter an application URL.' }
 ];
 
+// Validates the form data submitted
 function validateForm() {
     let isValid = true;
 
@@ -20,6 +22,7 @@ function validateForm() {
 
         error.textContent = '';
 
+        // Checks if required fields are empty or not
         if (value === '') {
             error.textContent = field.message;
             isValid = false;
@@ -34,6 +37,7 @@ function validateForm() {
     return isValid;
 }
 
+// Loops through each field and removes error messages if correct data is submitted
 fields.forEach(function (field) {
     const input = document.getElementById(field.id);
 

@@ -4,12 +4,16 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Creates express application
 const app = new express();
 
+// App port number
 const PORT = 3050;
 
+// Saves data from form data and stores it in this array
 const jobs = [];
 
+// Create a pool of connections
 const pool = mysql2.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -18,32 +22,25 @@ const pool = mysql2.createPool({
     port: process.env.DB_PORT
 }).promise();
 
+// Express looks into public folder when getting webpages
 app.use(express.static('public'));
 
 app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 
+// Home Route
 app.get('/', (req, res) => {
     res.render('home', { title: 'HOME' });
 });
 
+// Add a Job Form Route
 app.get('/add-job', (req, res) => {
     res.render('add-job');
 });
 
+// This is where form submissions are sent to and saved on the database
 app.post('/submit-job', async (req, res) => {
-    /*const job = {
-        jobTitle: req.body.jobTitle,
-        companyName: req.body.companyName,
-        tradeArea: req.body.tradeArea,
-        location: req.body.location,
-        jobType: req.body.jobType,
-        postDate: new Date().toLocaleDateString(),
-        expirationDate: req.body.expirationDate,
-        applicationUrl: req.body.applicationUrl,
-        timestamp: new Date()
-    };*/
     try {
         const job = req.body;
         console.log(job);
@@ -71,10 +68,12 @@ app.post('/submit-job', async (req, res) => {
     }
 });
 
+// Job Submission Confirmation Route
 app.get('/confirm', (req, res) => {
     res.render('confirm');
 });
 
+// Data is taken from the database and sent to the Jobs Route, where they are displayed on a datatable
 app.get('/jobs', async (req, res) => {
     try {
         //selects only active jobs and orders them by newest first
@@ -89,6 +88,7 @@ app.get('/jobs', async (req, res) => {
     }
 });
 
+// Application listens on the specified PORT number
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 });

@@ -45,7 +45,7 @@ app.post('/submit-job', async (req, res) => {
         const job = req.body;
         console.log(job);
 
-        const sql = 'INSERT INTO jobs (jobTitle, companyName, tradeArea, location, listingType, jobType, postDate, expirationDate, applicationURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const sql = 'INSERT INTO jobs (job_title, company_name, trade_area, location, listing_type, job_type, post_date, expiration_date, application_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
         const params = [
             job.jobTitle,

@@ -10,11 +10,13 @@
     --primary-color-hover: #d14900;
     --secondary-color: white;
     --tertiary-color: #f8f9fa;
-    --tertiary-color-hover: #f1f1f1;
+    --tertiary-color-hover: #eef5ee;
     --error-color: #d9534f;
     --background-color: #ededed;
-    --border-color: #ddd;
+    --border-color: #e3e7e3;
+    --text-muted: #5c655c;
     --shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 6px 24px rgba(0, 0, 0, 0.10);
 }
 
 body {
@@ -39,8 +41,10 @@ body {
 
 h1 {
     color: var(--primary-color);
-    margin-bottom: 10px;
+    margin: 0.5rem 0 0.5rem;
     text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing: -0.5px;
 }
 
 h2 {
@@ -49,7 +53,9 @@ h2 {
 }
 
 p {
-    margin-bottom: 20px;
+    max-width: 650px;
+    margin: 0 auto 1.5rem;
+    color: var(--text-muted);
     text-align: center;
 }
 
@@ -60,14 +66,22 @@ header {
 }
 
 #main {
-    width: 90%;
-    max-width: 1100px;
-    margin: 2rem auto;
-    padding: 1rem;
-    box-shadow: var(--shadow);
-    border-radius: .5rem;
+    width: 92%;
+    max-width: 1150px;
+    margin: 2.5rem auto 3rem;
+    padding: 2rem 2rem 1.5rem;
+    box-shadow: var(--shadow-card);
+    border-radius: 14px;
     background: var(--secondary-color);
     overflow: hidden;
+}
+
+@media screen and (max-width: 600px) {
+    #main {
+        width: 94%;
+        margin: 1.25rem auto 2rem;
+        padding: 1.25rem 0.9rem 1rem;
+    }
 }
 
 /*Allows table wrap to be constrained to parent container*/
@@ -88,18 +102,21 @@ header {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1.75rem;
 }
 
 /*Simple button style for anchor links*/
 .main-button {
     display: inline-block;
     background-color: var(--primary-color);
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.1s ease;
     color: var(--secondary-color);
-    padding: 8px 14px;
-    border-radius: 4px;
-    margin-right: 10px;
-    margin-bottom: 20px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 0.95rem;
     text-align: center;
     text-decoration: none;
 }
@@ -107,6 +124,7 @@ header {
 .main-button:hover {
     background-color: var(--primary-color-hover);
     text-decoration: none;
+    transform: translateY(-1px);
 }
 
 /*--Navigation Bar--*/
@@ -166,6 +184,7 @@ header {
     font-size: clamp(1.4rem, 5vw, 4rem);
     line-height: 1.1;
     overflow-wrap: anywhere;
+    letter-spacing: 0;
 }
 
 /* Phones */
@@ -194,6 +213,7 @@ header {
     padding: 25px;
     background: var(--secondary-color);
     border: 1px solid var(--border-color);
+    border-radius: 10px;
     box-shadow: var(--shadow);
 }
 
@@ -208,9 +228,15 @@ header {
 .job-form button {
     padding: 10px;
     font-size: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border: 1px solid #cfd6cf;
+    border-radius: 6px;
     width: 100%;
+}
+
+.job-form input:focus,
+.job-form select:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 1px;
 }
 
 .job-form button {
@@ -220,6 +246,7 @@ header {
     font-weight: bold;
     cursor: pointer;
     margin-top: 15px;
+    transition: background-color 0.2s ease;
 }
 
 .job-form button:hover {
@@ -233,30 +260,137 @@ header {
 }
 
 /*--Jobs Table--*/
-.jobs-table {
-    width: 100%;
-    border-collapse: collapse;
+#main table.jobs-table {
+    border-collapse: separate;
+    border-spacing: 0;
     background: var(--secondary-color);
-    margin-top: 15px;
-    box-shadow: var(--shadow);
-}
-
-.jobs-table th,
-.jobs-table td {
+    margin-top: 12px;
     border: 1px solid var(--border-color);
-    padding: 10px 12px;
-    text-align: left;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.95rem;
 }
 
-.jobs-table th {
+/* Header row: no heavy vertical lines */
+#main table.jobs-table thead th {
     background-color: var(--primary-color);
     color: var(--secondary-color);
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    text-align: left;
+    border: none;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.12);
 }
 
-.jobs-table tr:nth-child(even) {
+/* Body rows: only soft lines between rows */
+#main table.jobs-table tbody td {
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: middle;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#main table.jobs-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#main table.jobs-table tbody tr {
+    background-color: var(--secondary-color);
+    transition: background-color 0.15s ease;
+}
+
+#main table.jobs-table tbody tr:nth-child(even) {
     background-color: var(--tertiary-color);
 }
 
-.jobs-table tr:hover {
+#main table.jobs-table tbody tr:hover {
     background-color: var(--tertiary-color-hover);
+}
+
+/* Smaller Apply Now button inside the table, never wraps */
+#main table.jobs-table .main-button {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+/*--DataTables controls (search, entries, pagination)--*/
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 14px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_length select {
+    padding: 8px 10px;
+    border: 1px solid #cfd6cf;
+    border-radius: 6px;
+    background-color: var(--secondary-color);
+    font-size: 0.95rem;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 8px;
+    min-width: 200px;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus,
+.dataTables_wrapper .dataTables_length select:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 1px;
+}
+
+.dataTables_wrapper .dataTables_info {
+    padding-top: 1.2rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    padding-top: 1rem;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 6px;
+    border: 1px solid transparent;
+    color: var(--primary-color) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    background: var(--primary-color) !important;
+    color: var(--secondary-color) !important;
+    border: 1px solid var(--primary-color);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: var(--tertiary-color-hover) !important;
+    color: var(--primary-color) !important;
+    border: 1px solid var(--border-color);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+    color: #aaa !important;
+    background: transparent !important;
+    border: 1px solid transparent;
+}
+
+/* Stack search/entries neatly on phones */
+@media screen and (max-width: 600px) {
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        text-align: left;
+        float: none;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        width: calc(100% - 70px);
+        min-width: 0;
+    }
 }

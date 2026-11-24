@@ -2,24 +2,29 @@
 <html lang="en">
 
 <head>
-  <%- include('partials/head',{title: 'Browse Jobs' })%>
+  <%- include('partials/head',{title: 'Trades Job Board' })%>
   <!-- DataTables CSS CDN -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 </head>
 
 <body>
-  <%- include('partials/nav', { heading: 'Dashboard' })%>
+  <%- include('partials/nav', { heading: 'Trades Board' })%>
   <div id="main">
-    <h1>Browse Available Jobs</h1>
-    <div id="main-button-container" .=>
-      <a href="/" class="main-button">Back home</a>
-      <a href="/add-job" class="main-button">Add a Job </a>
+    <h1>Trades Job Board</h1>
+    <p>Find jobs in Welding, Automotive, Manufacturing, Carpentry, and Mechatronics.</p>
+    <div id="main-button-container">
+      <% if (isAdmin) { %>
+      <a href="/add-job" class="main-button">Add a Job</a>
+      <a href="/logout" class="main-button">Logout</a>
+      <% } else { %>
+      <a href="/login" class="main-button">Login</a>
+      <% } %>
       <a href="https://www.greenriver.edu/students/academics/areas-of-interest/program-maps/trades-industrial-tech-aviation-natural-resources/index.html" target="_blank" rel="noopener noreferrer" class="main-button">Explore GRC Trades Programs</a>
     </div>
 
     <% if (jobs.length===0) { %>
-    <p> No jobs are currently available. Check back later or add a new job posting!</p>
+    <p> No jobs are currently available. Check back later!</p>
     <% } else { %>
     <table class="jobs-table">
       <thead>

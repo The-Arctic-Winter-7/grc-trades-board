@@ -22,6 +22,8 @@ const pool = mysql2.createPool({
     port: process.env.DB_PORT
 }).promise();
 
+app.set('view engine', 'ejs');
+
 // Express looks into public folder when getting webpages
 app.use(express.static('public'));
 
@@ -89,11 +91,25 @@ app.get('/logout', (req, res) => {
     });
 });
 
-app.set('view engine', 'ejs');
+// Home Route: the home page IS the job listings page
+// Data is taken from the database and sent to the jobs view, where it is displayed in a datatable
+app.get('/', async (req, res) => {
+    try {
+        //selects only active jobs and orders them by newest first
+        const sql = 'SELECT * FROM jobs WHERE expiration_date >= CURDATE() ORDER BY post_date DESC';
 
-// Home Route
-app.get('/', (req, res) => {
-    res.render('home', { title: 'HOME' });
+        const [jobs] = await pool.query(sql);
+
+        res.render('jobs', { jobs: jobs });
+    } catch (err) {
+        console.error('Database error: ', err);
+        res.status(500).send('Database error ocurred.');
+    }
+});
+
+// Old /jobs URL still works: it sends people to the home page
+app.get('/jobs', (req, res) => {
+    res.redirect('/');
 });
 
 // Add a Job Form Route
@@ -133,21 +149,6 @@ app.post('/submit-job', requireAdmin, async (req, res) => {
 // Job Submission Confirmation Route
 app.get('/confirm', requireAdmin, (req, res) => {
     res.render('confirm');
-});
-
-// Data is taken from the database and sent to the Jobs Route, where they are displayed on a datatable
-app.get('/jobs', async (req, res) => {
-    try {
-        //selects only active jobs and orders them by newest first
-        const sql = 'SELECT * FROM jobs WHERE expiration_date >= CURDATE() ORDER BY post_date DESC';
-
-        const [jobs] = await pool.query(sql);
-
-        res.render('jobs', { jobs: jobs });
-    } catch (err) {
-        console.error('Database error: ', err);
-        res.status(500).send('Database error ocurred.');
-    }
 });
 
 // Application listens on the specified PORT number

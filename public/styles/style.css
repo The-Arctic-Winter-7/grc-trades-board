@@ -104,7 +104,14 @@ header {
     min-height: 130px;
     border-bottom: 3px solid var(--border-color);
     box-shadow: var(--shadow);
-    background-color: var(--background-color);
+    background-color: #2b3a2b;
+    /* Dark overlay keeps the title readable on top of the photo */
+    background-image:
+        linear-gradient(rgba(10, 30, 10, 0.55), rgba(10, 30, 10, 0.55)),
+        url('/images/header-bg.jpg');
+    background-size: cover;
+    background-position: center 40%;
+    background-repeat: no-repeat;
 }
 
 /* Logo side stays as wide as the logo */
@@ -142,7 +149,8 @@ header {
     text-transform: uppercase;
     font-family: 'Rubik', sans-serif;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--secondary-color);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
     font-size: clamp(1.4rem, 5vw, 4rem);
     line-height: 1.1;
     overflow-wrap: anywhere;

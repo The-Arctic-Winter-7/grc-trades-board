@@ -9,10 +9,11 @@
   <%- include('partials/nav', { heading: 'Job Posting' })%>
     <div id="main">
       <h1>Add a Job Posting</h1>
-      <div id="main-button-container" .=>
-        <a href="/" class="main-button">Back home</a>
-        <a href="/jobs" class="main-button">Browse Jobs </a>
-      </div>
+    <div id="main-button-container">
+      <a href="/" class="main-button">Back home</a>
+      <a href="/jobs" class="main-button">Browse Jobs </a>
+      <a href="/logout" class="main-button">Logout</a>
+    </div>
 
       <form id="jobForm" action="/submit-job" method="POST" class="job-form" novalidate
         onsubmit="return validateForm()">

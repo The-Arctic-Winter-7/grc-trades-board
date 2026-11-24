@@ -1,7 +1,7 @@
 import express from 'express';
 import mysql2 from 'mysql2';
 import dotenv from 'dotenv';
-
+import session from 'express-session';
 dotenv.config();
 
 // Creates express application
@@ -27,6 +27,68 @@ app.use(express.static('public'));
 
 app.use(express.urlencoded({ extended: true }));
 
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 } // session expires after 1 hour
+}));
+
+// Makes isAdmin available in every EJS view (your teammate needs this for Step 4's Add Job link)
+app.use((req, res, next) => {
+    res.locals.isAdmin = !!req.session.isAdmin;
+    next();
+});
+
+// Blocks anyone who is not logged in
+function requireAdmin(req, res, next) {
+    // Stops the browser from caching protected pages, so Back after logout doesn't show them
+    res.set('Cache-Control', 'no-store');
+    if (req.session.isAdmin) {
+        return next();
+    }
+    res.redirect('/login');
+}
+
+
+// Login form
+app.get('/login', (req, res) => {
+    if (req.session.isAdmin) {
+        return res.redirect('/add-job');
+    }
+    res.render('login', { error: null, username: '' });
+});
+
+// Check credentials
+app.post('/login', (req, res) => {
+    const { username = '', password = '' } = req.body;
+
+    if (!username.trim() || !password) {
+        return res.status(400).render('login', {
+            error: 'Please enter both a username and password.',
+            username
+        });
+    }
+
+    if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+        req.session.isAdmin = true;
+        return res.redirect('/add-job');
+    }
+
+    // Password is not sent back, so the field is cleared
+    res.status(401).render('login', {
+        error: 'Incorrect username or password. Please try again.',
+        username
+    });
+});
+
+// Logout
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
+});
+
 app.set('view engine', 'ejs');
 
 // Home Route
@@ -35,12 +97,12 @@ app.get('/', (req, res) => {
 });
 
 // Add a Job Form Route
-app.get('/add-job', (req, res) => {
+app.get('/add-job', requireAdmin, (req, res) => {
     res.render('add-job');
 });
 
 // This is where form submissions are sent to and saved on the database
-app.post('/submit-job', async (req, res) => {
+app.post('/submit-job', requireAdmin, async (req, res) => {
     try {
         const job = req.body;
         console.log(job);
@@ -69,7 +131,7 @@ app.post('/submit-job', async (req, res) => {
 });
 
 // Job Submission Confirmation Route
-app.get('/confirm', (req, res) => {
+app.get('/confirm', requireAdmin, (req, res) => {
     res.render('confirm');
 });
 

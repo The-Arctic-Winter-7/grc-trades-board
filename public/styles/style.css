@@ -23,6 +23,18 @@ body {
     margin: 0;
     color: #333;
     background-color: var(--background-color);
+    background-image: url('/images/page-bg.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* Fixed backgrounds can glitch on phones, so let it scroll there */
+@media screen and (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+    }
 }
 
 h1 {

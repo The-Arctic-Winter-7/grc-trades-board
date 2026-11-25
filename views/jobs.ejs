@@ -58,7 +58,7 @@
             <%= job.listing_type %>
           </td>
           <td>
-            <%= job.job_type %>
+            <%= job.job_type ? job.job_type : 'Not specified' %>
           </td>
           <td data-order = "<%= job.expiration_date.toISOString() %>">
             <%= job.expiration_date.toLocaleDateString('en-US') %>

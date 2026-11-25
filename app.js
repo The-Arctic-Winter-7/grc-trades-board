@@ -52,7 +52,6 @@ function requireAdmin(req, res, next) {
     res.redirect('/login');
 }
 
-
 // Login form
 app.get('/login', (req, res) => {
     if (req.session.isAdmin) {
@@ -113,8 +112,14 @@ app.get('/jobs', (req, res) => {
 });
 
 // Add a Job Form Route
-app.get('/add-job', requireAdmin, (req, res) => {
-    res.render('add-job');
+app.get('/add-job', requireAdmin, async (req, res) => {
+    try{
+        const [trades]= await pool.query('SELECT id, name FROM trades ORDER BY name ASC');
+        res.render('add-job',{ trades });
+    } catch (err) {
+        console.error('Error fetching trades: ', err);
+        res.status(500).send('Error Loading the Trades');
+    }
 });
 
 // This is where form submissions are sent to and saved on the database
@@ -123,7 +128,9 @@ app.post('/submit-job', requireAdmin, async (req, res) => {
         const job = req.body;
         console.log(job);
 
-        const sql = 'INSERT INTO jobs (job_title, company_name, trade_area, location, listing_type, job_type, post_date, expiration_date, application_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const jobTypevalue = job.jobType ? job.jobType : null;
+
+        const sql = 'INSERT INTO jobs (job_title, company_name, trade_area, location, listing_type, job_type, expiration_date, application_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 
         const params = [
             job.jobTitle,
@@ -131,8 +138,7 @@ app.post('/submit-job', requireAdmin, async (req, res) => {
             job.tradeArea,
             job.location,
             job.listingType,
-            job.jobType,
-            job.postDate,
+            jobTypevalue,
             job.expirationDate,
             job.applicationUrl
         ];

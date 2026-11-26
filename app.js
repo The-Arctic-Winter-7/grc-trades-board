@@ -111,6 +111,11 @@ app.get('/jobs', (req, res) => {
     res.redirect('/');
 });
 
+//Student Resources Route Page
+app.get('/student-resources', (req, res) => {
+    res.render('student-resources');
+});
+
 // Add a Job Form Route
 app.get('/add-job', requireAdmin, async (req, res) => {
     try{

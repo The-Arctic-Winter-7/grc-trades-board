@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head',{title: 'Student Resources' })%>
+</head>
+<body>
+    <%- include('partials/nav', { heading: 'Student Resources' }) %>
+    <div id="main">
+        <h1>Student Resources</h1>
+        <p>Helpful Green River College support links and a quick resume checklist for trades openings.</p>
+        <div id = "main-button-container">
+            <a href ="/" class= "main-button">Back to Jobs</a>
+            <% if (isAdmin) { %>
+            <a href="/add-job" class="main-button">Add a Job</a>
+            <a href="/logout" class="main-button">Logout</a>
+            <% } else { %>
+            <a href="/login" class="main-button">Login</a>
+            <% } %>
+        </div>
+        <h2>Campus Support &amp; Funding</h2>
+        <ul class="resource-list">
+            <li>
+                <strong>Financial Aid:</strong> - Get help with FAFSA/WASFA, grants, scholarships, and aid status.
+                <a href ="https://www.greenriver.edu/students/pay-for-college/financial-aid/index.html" target="_blank" rel="noopener noreferrer">Visit Financial Aid</a>
+            </li>
+            <li>
+                <strong>Workforce Education:</strong> Explore funding programs (Opportunity Grants BFET, and Worker Retraining) that can help cover tuition, books, and tools.
+                <a href="https://www.greenriver.edu/students/academics/workforce/index.html" target="_blank" rel="noopener noreferrer">Visit Workforce Education</a>
+            </li>
+            <li>
+                <strong>Career &amp; Advising Center:</strong> Get resume feedback, interview prep, career coaching, and counseling/benefits appointments.
+                <a href="https://www.greenriver.edu/students/academics/career-and-advising-center/career-services/index.html" target="_blank" rel="noopener noreferrer">Visit Career Services</a>
+            </li>
+        </ul>
+
+        <h2> Trades Resume Checklist</h2>
+        <p> Check off what you have ready before applying to a lisitng:</p>
+        
+        <div class="checklist-box">
+      <label class="checklist-item">
+        <input type="checkbox" class="resume-check">
+        <span>Contact info, phone number, email, and city/area</span>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="resume-check">
+        <span>Trade program, coursework, or hands-on shop/lab projects</span>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="resume-check">
+        <span>Certifications, licenses, or safety training (such as OSHA or CPR/first aid)</span>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="resume-check">
+        <span>Tools, equipment, or machinery experience relevant to the trade</span>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="resume-check">
+        <span>Work history showing reliability, teamwork, or following safety rules</span>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="resume-check">
+        <span>Reliable transportation or ability to get to the job site on time</span>
+      </label>
+
+      <p id="checklistStatus"><strong>0 of 6 completed</strong></p>
+      <button type="button" id="resetChecklistBtn" class="main-button">Reset Checklist</button>
+        </div>
+    </div>
+    
+    <script>
+    const checkboxes = document.querySelectorAll('.resume-check');
+    const statusText = document.getElementById('checklistStatus');
+    const resetBtn = document.getElementById('resetChecklistBtn');
+
+    function updateStatus() {
+      const checkedCount = document.querySelectorAll('.resume-check:checked').length;
+      statusText.innerHTML = `<strong>${checkedCount} of ${checkboxes.length} completed</strong>`;
+    }
+
+    checkboxes.forEach((box) => {
+      box.addEventListener('change', updateStatus);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      checkboxes.forEach((box) => {
+        box.checked = false;
+      });
+      updateStatus();
+    });
+  </script>
+
+</body>
+</html>

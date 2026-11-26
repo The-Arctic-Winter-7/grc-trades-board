@@ -381,6 +381,37 @@ header {
     border: 1px solid transparent;
 }
 
+.resource-list {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    padding-left: 1.25rem;
+}
+
+.resource-list li {
+    margin-bottom: 0.9rem;
+}
+
+.checklist-box {
+    max-width: 600px;
+    margin: 0 auto 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--tertiary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+}
+
+.checklist-item input {
+    margin-top: 4px;
+}
+
 /* Stack search/entries neatly on phones */
 @media screen and (max-width: 600px) {
     .dataTables_wrapper .dataTables_length,

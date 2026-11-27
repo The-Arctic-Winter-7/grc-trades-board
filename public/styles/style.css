@@ -59,6 +59,11 @@ p {
     text-align: center;
 }
 
+.apply-by {
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+}
+
 header {
     position: sticky;
     top: 0;
@@ -170,6 +175,10 @@ header {
     object-fit: contain;
     background-color: var(--primary-color);
     transition: background-color 0.2s ease;
+}
+
+.nav-bar-logo img:hover {
+    background-color: var(--primary-color-hover);
 }
 
 .nav-bar-title-heading {
@@ -414,6 +423,7 @@ header {
 
 /* Stack search/entries neatly on phones */
 @media screen and (max-width: 600px) {
+
     .dataTables_wrapper .dataTables_length,
     .dataTables_wrapper .dataTables_filter {
         text-align: left;

@@ -3,101 +3,98 @@
 
 <head>
   <%- include('partials/head',{title: 'Trades Job Board' })%>
-  <!-- DataTables CSS CDN -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+    <!-- DataTables CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 </head>
 
 <body>
   <%- include('partials/nav', { heading: 'Trades Board' })%>
-  <div id="main">
-    <h1>Trades Job Board</h1>
-    <p>Find jobs in Welding, Automotive, Manufacturing, Carpentry, and Mechatronics.</p>
-    <div id="main-button-container">
-      <% if (isAdmin) { %>
-      <a href="/add-job" class="main-button">Add a Job</a>
-      <a href="/student-resources" class="main-button">Student Resources</a>
-      <a href="/logout" class="main-button">Logout</a>
-      <% } else { %>
-      <a href="/login" class="main-button">Login</a>
-      <a href="/student-resources" class="main-button">Student Resources</a>
-      <% } %>
-      <a href="https://www.greenriver.edu/students/academics/areas-of-interest/program-maps/trades-industrial-tech-aviation-natural-resources/index.html" target="_blank" rel="noopener noreferrer" class="main-button">Explore GRC Trades Programs</a>
+    <div id="main">
+      <h1>Trades Job Board</h1>
+      <p>Find jobs in Welding, Automotive, Manufacturing, Carpentry, and Mechatronics.</p>
+      <div id="main-button-container">
+        <% if (isAdmin) { %>
+          <a href="/add-job" class="main-button">Add a Job</a>
+          <a href="/student-resources" class="main-button">Student Resources</a>
+          <a href="/logout" class="main-button">Logout</a>
+          <% } else { %>
+            <a href="/login" class="main-button">Login</a>
+            <a href="/student-resources" class="main-button">Student Resources</a>
+            <% } %>
+              <a href="https://www.greenriver.edu/students/academics/areas-of-interest/program-maps/trades-industrial-tech-aviation-natural-resources/index.html"
+                target="_blank" rel="noopener noreferrer" class="main-button">Explore GRC Trades Programs</a>
+      </div>
+
+      <% if (jobs.length===0) { %>
+        <p> No jobs are currently available. Check back later!</p>
+        <% } else { %>
+          <table class="jobs-table">
+            <thead>
+              <tr>
+                <th>Apply By</th>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Trade Area</th>
+                <th>Location</th>
+                <th>Job Type</th>
+                <th>Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% jobs.forEach(job=> { %>
+                <tr>
+                  <td data-order="<%= job.expiration_date.toISOString() %>">
+                    <p class="apply-by">
+                      <%= job.expiration_date.toLocaleDateString('en-US') %>
+                    </p>
+                    <a href="<%= job.application_url %>" target="_blank" rel="noopener noreferrer"
+                      class="main-button">Apply Now</a>
+                  </td>
+                  <td>
+                    <%= job.job_title %>
+                  </td>
+                  <td>
+                    <%= job.company_name %>
+                  </td>
+                  <td>
+                    <%= job.trade_area %>
+                  </td>
+                  <td>
+                    <%= job.location %>
+                  </td>
+                  <td>
+                    <%= job.listing_type %>
+                  </td>
+                  <td>
+                    <%= job.job_type ? job.job_type : 'Not specified' %>
+                  </td>
+                </tr>
+                <% }) %>
+            </tbody>
+          </table>
+          <% } %>
     </div>
 
-    <% if (jobs.length===0) { %>
-    <p> No jobs are currently available. Check back later!</p>
-    <% } else { %>
-    <table class="jobs-table">
-      <thead>
-        <tr>
-          <th>Job Title</th>
-          <th>Company</th>
-          <th>Trade Area</th>
-          <th>Location</th>
-          <th>Job or Internship</th>
-          <th>Full-Time or Part-Time</th>
-          <th>Expiration Date</th>
-          <th>Apply</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% jobs.forEach(job=> { %>
-        <tr>
-          <td>
-            <%= job.job_title %>
-          </td>
-          <td>
-            <%= job.company_name %>
-          </td>
-          <td>
-            <%= job.trade_area %>
-          </td>
-          <td>
-            <%= job.location %>
-          </td>
-          <td>
-            <%= job.listing_type %>
-          </td>
-          <td>
-            <%= job.job_type ? job.job_type : 'Not specified' %>
-          </td>
-          <td data-order = "<%= job.expiration_date.toISOString() %>">
-            <%= job.expiration_date.toLocaleDateString('en-US') %>
-          </td>
-          <td>
-            <a href="<%= job.application_url %>" target="_blank" rel="noopener noreferrer" class="main-button">Apply Now</a>
-          </td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
-    <% } %>
-  </div>
+    <!-- JQuery CDN-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- DataTables JS CDN -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 
-  <!-- JQuery CDN-->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <!-- DataTables JS CDN -->
-  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-
-  <!-- Initialize DataTables -->
-  <script>
-    $(document).ready(function() {
-      $('.jobs-table').DataTable({
-        responsive: {
-          details: {
-            display: $.fn.DataTable.Responsive.display.childRowImmediate
-          }
-        },
-        "order":[[6, 'asc']], // Sorts by expiration date by default; first to expire is first
-        columnDefs: [{
-          orderable: false,
-          targets: 7          // Refers to 'Apply' column of the table; apply column cannot be sorted
-        }]
+    <!-- Initialize DataTables -->
+    <script>
+      $(document).ready(function () {
+        $('.jobs-table').DataTable({
+          responsive: {
+            details: {
+              display: $.fn.DataTable.Responsive.display.childRowImmediate
+            }
+          },
+          "order": [[0, 'asc']], // Sorts by expiration date by default; first to expire is first
+        });
       });
-    });
-  </script>
+    </script>
 </body>
 
 </html>
